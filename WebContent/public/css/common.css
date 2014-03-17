@@ -1,0 +1,24 @@
+.newtable {
+	border: border:none;
+	border-collapse: collapse;
+}
+
+.newtable tr td {
+	border: solid #000 1px;
+}
+
+.newtable tr th {
+	border: solid #000 1px;
+}
+
+.newthead {
+	background-color: #1E90FF;
+}
+
+.neweven {
+	background-color: #87CEEB;
+}
+
+.newodd {
+	background-color: #00BFFF;
+}

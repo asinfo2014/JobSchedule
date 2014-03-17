@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.action.extension" value="do" />
+	<constant name="struts.ui.theme" value="simple" /> 
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<default-action-ref name="index" />
+
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+
+		<action name="index">
+			<result>/index.jsp</result>
+		</action>
+		<action name="index2">
+			<result>/index2.jsp</result>
+		</action>
+
+		<action name="Config" class="com.actions.ConfigAction">
+			<result>/config/index.jsp</result>
+		</action>
+
+		<action name="Manager" class="com.actions.ManagerAction">
+			<result>/manager/index.jsp</result>
+		</action>
+
+		<action name="Monitor" class="com.actions.MonitorAction"
+			method="testmethod">
+			<result name="index">/monitor/a.html</result>
+		</action>
+
+		<action name="Monitor1" class="com.actions.MonitorAction">
+			<result name="index">/monitor/a.html</result>
+		</action>
+
+	</package>
+	<!-- 管理配置库 -->
+	<package name="config" namespace="/config" extends="struts-default">
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
+
+		<action name="list" class="com.actions.ConfigAction" method="list">
+			<result name="list">/config/index.jsp</result>
+		</action>
+		<action name="toEdit" class="com.actions.ConfigAction" method="toEdit">
+			<result name="toEdit">/config/edit.jsp</result>
+		</action>
+		<action name="edit" class="com.actions.ConfigAction" method="edit">
+			<result name="view">/config/view.jsp</result>
+		</action>
+		<action name="delete" class="com.actions.ConfigAction" method="delete">
+			<result name="success" type="redirectAction">list</result>
+		</action>
+		<action name="view" class="com.actions.ConfigAction" method="view">
+			<result name="view">/config/view.jsp</result>
+		</action>
+	</package>
+
+	<package name="monitor" namespace="/monitor" extends="struts-default">
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
+
+		<action name="index" class="com.actions.MonitorAction" method="index">
+			<result name="index">/monitor/index.jsp</result>
+		</action>
+		<action name="flowdirs" class="com.actions.MonitorAction"
+			method="flowdirs">
+		</action>
+		<action name="instancetask" class="com.actions.MonitorAction"
+			method="instanceTask">
+			<result name="instancetask">/monitor/instancetask.jsp</result>
+		</action>
+	</package>
+
+	<!-- 动态管理 -->
+	<package name="manager" namespace="/manager" extends="struts-default">
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
+		<action name="list" class="com.actions.ManagerAction" method="list">
+			<result name="list">/manager/index.jsp</result>
+		</action>
+		<action name="activeFlow" class="com.actions.ManagerAction"
+			method="activeFlow">
+			<result name="success" type="redirectAction">list</result>
+		</action>
+		<action name="closeFlow" class="com.actions.ManagerAction"
+			method="closeFlow">
+			<result name="success" type="redirectAction">list</result>
+		</action>
+	</package>
+</struts>
